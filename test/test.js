@@ -5,3 +5,11 @@ const knex = require("knex")("./knexfile.js");
 const forcePromiseReject = () => {
   throw new Error("This promise should have failed, but did not.");
 };
+
+describe("CRUD API", () => {
+  describe("some.module", () => {
+    it("should.do.foo", () => {
+      expect(true).to.be.true;
+    });
+  });
+});
