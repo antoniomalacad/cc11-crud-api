@@ -25,6 +25,7 @@
     "knex": "^0.20.8",
     "mocha": "^7.0.0",
     "nodemon": "^2.0.2",
+    "pg": "^7.17.1",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
     "style-loader": "^1.1.3",
