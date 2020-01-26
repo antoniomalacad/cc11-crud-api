@@ -21,7 +21,7 @@ function createElement(text, div) {
   return container;
 }
 
-const title = createElement("Coffee Menu", "h1");
+const title = createElement("Coffee Shop", "h1");
 document.getElementById("title").appendChild(title);
 
 const submitButton = document.getElementById("submit");
