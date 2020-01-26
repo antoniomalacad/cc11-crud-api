@@ -9,7 +9,8 @@ exports.seed = function(knex) {
         data.map(entry => {
           return {
             id: entry.id,
-            name: entry.name
+            drink: entry.name,
+            price: entry.price
           };
         })
       );

@@ -1,18 +1,22 @@
 [
   {
     "id": 1,
-    "name": "Latte"
+    "name": "Latte",
+    "price": 500
   },
   {
     "id": 2,
-    "name": "Americano"
+    "name": "Americano",
+    "price": 350
   },
   {
     "id": 3,
-    "name": "Cappucino"
+    "name": "Cappucino",
+    "price": 500
   },
   {
     "id": 4,
-    "name": "Espresso"
+    "name": "Espresso",
+    "price": 350
   }
 ]
