@@ -3,6 +3,7 @@ const knex = require("knex")("./knexfile.js");
 const morgan = require("morgan");
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
 
@@ -16,9 +17,7 @@ app.use(
   })
 );
 
-app.get("/", (request, response) => {
-  response.json({ info: "Using Node.js, Express, and Postgres API." });
-});
+app.use(express.static(path.join(__dirname)));
 
 app.listen(config.express.port, () => {
   console.log(`Server up and listening on port ${config.express.port}`);
