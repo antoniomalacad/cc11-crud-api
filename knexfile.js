@@ -3,7 +3,7 @@ const config = require("./config");
 module.exports = {
   development: {
     client: "pg",
-    connection: config.db.connection,
+    connection: "postgres://localhost/crud-api",
     migrations: {
       tableName: "knex_migrations",
       directory: "./data/migrations"
@@ -15,7 +15,7 @@ module.exports = {
 
   staging: {
     client: "pg",
-    connection: config.db.connection,
+    connection: "postgres://localhost/crud-api",
     pool: {
       min: 2,
       max: 10
@@ -31,7 +31,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: config.db.connection,
+    connection: "postgres://localhost/crud-api",
     pool: {
       min: 2,
       max: 10
