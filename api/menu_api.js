@@ -10,7 +10,13 @@ router.get("/", (req, res) => {
 
 router.get("/orders", (req, res) => {
   queries.getOrders().then(log => {
-    response.json(log);
+    res.json(log);
+  });
+});
+
+router.post("/orders", (req, res) => {
+  queries.sendOrders().then(log => {
+    res.json(log);
   });
 });
 

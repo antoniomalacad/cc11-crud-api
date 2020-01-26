@@ -7,5 +7,9 @@ module.exports = {
 
   getOrders() {
     return knex("orders");
+  },
+
+  sendOrders(orders) {
+    return knex("orders").insert(orders);
   }
 };

@@ -1,38 +1,64 @@
-const config = require("./config");
-const morgan = require("morgan");
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
+// Initial API call to populate HTML elements.
 
-const app = express();
-const menu = require("./api/menu_api");
-
-app.use(morgan("dev"));
-app.use(bodyParser.json({ type: "application/json", limit: "50mb" }));
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
-);
-
-app.use("/api/", menu);
-
-app.listen(config.express.port, () => {
-  console.log(`Server up and listening on port ${config.express.port}`);
-});
-
-app.use((req, res, next) => {
-  const err = new Error("Not Found");
-  err.status = 404;
-  next(err);
-});
-
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.json({
-    messege: err.messege,
-    error: req.app.get("env") === "development" ? err : {}
+const getMenu = async () => {
+  let URL = `http://localhost:3000/api/`;
+  const fetchResult = fetch(URL);
+  const response = await fetchResult;
+  const data = await response.json();
+  const drinkNames = data.map(drink => {
+    let newDrink = document.createElement("option");
+    newDrink.value = drink.drink;
+    newDrink.innerText = drink.drink;
+    drink_items.appendChild(newDrink);
+    return drink.drink;
   });
+};
+
+function createElement(text, div) {
+  const container = document.createElement(div);
+  const textNode = document.createTextNode(text);
+  container.appendChild(textNode);
+  return container;
+}
+
+const title = createElement("Coffee Menu", "h1");
+document.getElementById("title").appendChild(title);
+
+const submitButton = document.getElementById("submit");
+
+const sendOrder = input => {
+  return fetch("http://localhost:3000/api/orders", {
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    method: "POST",
+    body: JSON.stringify(input)
+  })
+    .then(response => response.json())
+    .then(json => {
+      console.log("success");
+    });
+};
+
+submitButton.addEventListener("click", e => {
+  e.preventDefault();
+  const selectedDrink = document.getElementById("drinks");
+  const drinkName = selectedDrink[selectedDrink.selectedIndex].value;
+  const selectedNum = document.getElementById("amount");
+  const drinkAmt = selectedNum[selectedNum.selectedIndex].value;
+  const inputName = document.getElementById("name");
+  const name = inputName.value;
+  const extraInputs = document.getElementById("extras");
+  const extras = extraInputs.value;
+  console.log("Order submitted", drinkAmt, extras, drinkName, "for", name);
+  const orderLog = {
+    drink_name: drinkName,
+    amount: drinkAmt,
+    customer_name: name,
+    timestamp: new Date(),
+    comments: extras
+  };
+  sendOrder(orderLog);
+  document.getElementById("form").reset();
 });
 
-module.exports = app;
+const drink_items = document.getElementById("drinks");
+getMenu();

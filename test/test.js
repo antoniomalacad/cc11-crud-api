@@ -1,6 +1,6 @@
 const { expect, assert } = require("chai");
 const knex = require("../database/knex");
-const app = require("../index.js");
+const app = require("../app.js");
 const request = require("supertest");
 
 const forcePromiseReject = () => {

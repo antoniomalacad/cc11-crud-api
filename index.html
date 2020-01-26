@@ -10,7 +10,7 @@
   <body>
     <div id="title"></div>
     <section id="page"></section>
-    <form>
+    <form id="form">
       <label form="name">Place Order</label><br />
       <select id="drinks" name="Drink">
         <option value="">Select Drink</option>
@@ -24,10 +24,12 @@
         <option value="5">5</option>
         <option value="6">6</option>
       </select>
-      <br />
-      <input type="submit" />
+      <input type="text" id="name" placeholder="Order for..." />
+      <input type="text" id="extras" placeholder="Requests" />
       <input type="reset" />
+      <br />
+      <button id="submit" type="submit">Submit</button>
     </form>
-    <script type="text/javascript" src="/public/bundle.js"></script>
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
