@@ -15,7 +15,7 @@ router.get("/orders", (req, res) => {
 });
 
 router.post("/orders", (req, res) => {
-  queries.sendOrders().then(log => {
+  queries.sendOrders(req).then(log => {
     res.json(log);
   });
 });

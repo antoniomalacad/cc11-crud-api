@@ -26,7 +26,7 @@ document.getElementById("title").appendChild(title);
 
 const submitButton = document.getElementById("submit");
 
-const sendOrder = input => {
+const sendOrder = async input => {
   return fetch("http://localhost:3000/api/orders", {
     headers: { "Content-Type": "application/json; charset=utf-8" },
     method: "POST",
@@ -48,16 +48,22 @@ submitButton.addEventListener("click", e => {
   const name = inputName.value;
   const extraInputs = document.getElementById("extras");
   const extras = extraInputs.value;
-  console.log("Order submitted", drinkAmt, extras, drinkName, "for", name);
-  const orderLog = {
-    drink_name: drinkName,
-    amount: drinkAmt,
-    customer_name: name,
-    timestamp: new Date(),
-    comments: extras
-  };
-  sendOrder(orderLog);
-  document.getElementById("form").reset();
+  if (name.length === 0 || drinkName.length === 0 || drinkAmt.lenth === 0) {
+    document.getElementById("form").reset();
+  } else {
+    console.log(
+      `Order submitted: ${drinkAmt} ${extras} ${drinkName} for ${name}.`
+    );
+    const orderLog = {
+      drink_name: drinkName,
+      amount: drinkAmt,
+      customer_name: name,
+      timestamp: new Date(),
+      comments: extras
+    };
+    sendOrder(orderLog);
+    document.getElementById("form").reset();
+  }
 });
 
 const drink_items = document.getElementById("drinks");
