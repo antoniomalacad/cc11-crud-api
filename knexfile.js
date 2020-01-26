@@ -13,6 +13,11 @@ module.exports = {
     }
   },
 
+  test: {
+    client: "pg",
+    connection: "postgres://localhost/crud-api"
+  },
+
   staging: {
     client: "pg",
     connection: "postgres://localhost/crud-api",

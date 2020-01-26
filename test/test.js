@@ -1,15 +1,26 @@
 const { expect, assert } = require("chai");
-const config = require("../config");
-const knex = require("knex")("./knexfile.js");
+const knex = require("../database/knex");
+const app = require("../index.js");
+const request = require("supertest");
 
 const forcePromiseReject = () => {
   throw new Error("This promise should have failed, but did not.");
 };
 
 describe("CRUD API", () => {
-  describe("some.module", () => {
-    it("should.do.foo", () => {
-      expect(true).to.be.true;
+  describe("Menu API", () => {
+    it("should return menu as an object", done => {
+      request(app)
+        .get("/api")
+        .set("Accept", "application/json")
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .then(response => {
+          expect(response.body).to.be.a("array");
+          console.log(response.body);
+          expect(response.body.length).to.equal(4);
+          done();
+        });
     });
   });
 });
